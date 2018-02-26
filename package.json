@@ -1,0 +1,29 @@
+{
+  "name": "friend-finder",
+  "version": "1.0.0",
+  "description": "Find a friend or possibly a companion",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dkwazhere/FriendFinder.git"
+  },
+  "keywords": [
+    "friend",
+    "find"
+  ],
+  "author": "dk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dkwazhere/FriendFinder/issues"
+  },
+  "homepage": "https://github.com/dkwazhere/FriendFinder#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "path": "^0.12.7"
+  }
+}

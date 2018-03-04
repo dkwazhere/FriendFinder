@@ -5,8 +5,9 @@ var path = require('path');
 
 // Express Configurations
 var app = express();
-var PORT = 8000;
+var PORT = process.env.PORT || 3000;
 
+app.use(express.static(path.join(__dirname, './app/public')));
 // Bodyparser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

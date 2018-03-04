@@ -22,7 +22,7 @@
   <!-- Navbar -->
   <div id="navbar">
     <nav>
-      <div class="nav-wrapper">
+      <div id="navvy" class="nav-wrapper">
         <a href="#" class="brand-logo">Friend Finder</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="sass.html">API Friend's List</a></li>
@@ -40,16 +40,16 @@
   <div class="row">
     <form class="col s12 z-depth-5 mainpanel">
       <div class="row">
-        <div class="input-field col s6">
-          <i class="material-icons prefix">account_circle</i>
-          <input id="icon_prefix" type="text" class="validate">
-          <label for="icon_prefix">Name (Required)</label>
-        </div>
-        <div class="input-field col s6">
-          <i class="material-icons prefix">image</i>
-          <input id="icon_telephone" type="tel" class="validate">
-          <label for="icon_telephone">Link to Photo Image (Required)</label>
-        </div>
+          <div class="input-field col s6">
+              <h5>Name (Required)</h5>
+              <i class="material-icons prefix">account_circle</i>
+              <input type="text" class="validate" placeholder="Your Name Here" id="userName">
+          </div>
+          <div class="input-field col s6">
+              <h5>Link to Photo Image (Required)</h5>
+              <i class="material-icons prefix">picture_in_picture</i>
+              <input type="text" class="validate" placeholder="Photo Link Here" id="userPhoto">
+          </div>
       </div>
 
       <!-- Questions -->
@@ -68,7 +68,7 @@
       <div class="input-field col s12">
         <h5>Question #2</h5>
         <h6>Generally speaking, you rely more on your experience than your imagination.</h6>
-        <select id="question1">
+        <select id="question2">
           <option value="" disabled selected>Choose your option</option>
           <option value="1">1(Strongly Disagree)</option>
           <option value="2">2</option>
@@ -80,7 +80,7 @@
       <div class="input-field col s12">
         <h5>Question #3</h5>
         <h6>You find it easy to stay relaxed and focused even when there is some pressure.</h6>
-        <select id="question1">
+        <select id="question3">
           <option value="" disabled selected>Choose your option</option>
           <option value="1">1(Strongly Disagree)</option>
           <option value="2">2</option>
@@ -92,7 +92,7 @@
       <div class="input-field col s12">
         <h5>Question #4</h5>
         <h6>You rarely do something just out of sheer curiosity.</h6>
-        <select id="question1">
+        <select id="question4">
           <option value="" disabled selected>Choose your option</option>
           <option value="1">1(Strongly Disagree)</option>
           <option value="2">2</option>
@@ -104,7 +104,7 @@
       <div class="input-field col s12">
         <h5>Question #5</h5>
         <h6>People can rarely upset you.</h6>
-        <select id="question1">
+        <select id="question5">
           <option value="" disabled selected>Choose your option</option>
           <option value="1">1(Strongly Disagree)</option>
           <option value="2">2</option>
@@ -116,7 +116,7 @@
       <div class="input-field col s12">
         <h5>Question #6</h5>
         <h6>It is often difficult for you to relate to other people’s feelings.</h6>
-        <select id="question1">
+        <select id="question6">
           <option value="" disabled selected>Choose your option</option>
           <option value="1">1(Strongly Disagree)</option>
           <option value="2">2</option>
@@ -128,7 +128,7 @@
       <div class="input-field col s12">
         <h5>Question #7</h5>
         <h6>In a discussion, truth should be more important than people’s sensitivities.</h6>
-        <select id="question1">
+        <select id="question7">
           <option value="" disabled selected>Choose your option</option>
           <option value="1">1(Strongly Disagree)</option>
           <option value="2">2</option>
@@ -140,7 +140,7 @@
       <div class="input-field col s12">
         <h5>Question #8</h5>
         <h6>You rarely get carried away by fantasies and ideas.</h6>
-        <select id="question1">
+        <select id="question8">
           <option value="" disabled selected>Choose your option</option>
           <option value="1">1(Strongly Disagree)</option>
           <option value="2">2</option>
@@ -152,7 +152,7 @@
       <div class="input-field col s12">
         <h5>Question #9</h5>
         <h6>You think that everyone’s views should be respected regardless of whether they are supported by facts or not.</h6>
-        <select id="question1">
+        <select id="question9">
           <option value="" disabled selected>Choose your option</option>
           <option value="1">1(Strongly Disagree)</option>
           <option value="2">2</option>
@@ -164,7 +164,7 @@
       <div class="input-field col s12">
         <h5>Question #10</h5>
         <h6>You feel more energetic after spending time with a group of people.</h6>
-        <select id="question1">
+        <select id="question10">
           <option value="" disabled selected>Choose your option</option>
           <option value="1">1(Strongly Disagree)</option>
           <option value="2">2</option>
@@ -173,12 +173,73 @@
           <option value="5">5(Strongly Agree)</option>
         </select>
       </div>
+      <div>
+        <button class="btn waves-effect waves-light" type="submit" id="surveySubmit" name="action">Submit
+            <i class="material-icons right">send</i>
+        </button>
+      </div>
     </form>
+    <br>
+    <br>
+    <!-- Modal display -->
+    <div id="modal" class="modalclass">
+        <div class="modal-content">
+            <h4>Closest Friend Match</h4>
+            <div class="divider"></div>
+            <h5 id="friendMatch"></h5>
+            <img id="friendImage" class="materialboxed" width="650" src="">
+        </div>
+        <div class="modal-footer">
+            <a href="/survey" class="modal-action modal-close waves-effect waves-green btn-flat">Find another friend</a>
+        </div>
+    </div>
   </div>
 
   <script type="text/javascript">
     $(document).ready(function() {
       $('select').material_select();
+      $('.modal').modal({
+        dismissible: true, // Modal can be dismissed by clicking outside of the modal
+        opacity: .5, // Opacity of modal background
+        inDuration: 300, // Transition in duration
+        outDuration: 200, // Transition out duration
+        startingTop: '4%', // Starting top style attribute
+        endingTop: '10%', // Ending top style attribute
+        ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+        alert("Ready");
+      console.log(modal, trigger);
+    },
+    complete: function() { alert('Closed'); } // Callback for Modal close
+  }
+);
+      // Submit button on click
+      $("#surveySubmit").on("click", function(event) {
+          event.preventDefault();
+
+        // Storing User Input
+        var userInput = {
+            name: $('#userName').val().trim(),
+            photo: $('#userPhoto').val().trim(),
+            scores:[
+                $('#question1').val().trim(),
+                $('#question2').val().trim(),
+                $('#question3').val().trim(),
+                $('#question4').val().trim(),
+                $('#question5').val().trim(),
+                $('#question6').val().trim(),
+                $('#question7').val().trim(),
+                $('#question8').val().trim(),
+                $('#question9').val().trim(),
+                $('#question10').val().trim()
+            ]
+        };
+        $.post('/api/friends', userInput).done(function(data) {
+            $('#friendMatch').html(data.friendMatch);
+            $('#friendImage').attr("src", data.friendImage);
+            $('#modal').modal('open');
+        })
+
+      })
     });
   </script>
 
